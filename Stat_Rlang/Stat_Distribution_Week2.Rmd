@@ -1,0 +1,91 @@
+---
+title: "Stat_Distribution_Week2"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Distributions
+
+##1 Discrete distributions
+
+1.1 Binomial distributions
+```{r}
+  num_obs <- 1000
+  binom_sample <- rbinom(num_obs,10,0.5)
+  ##rbinom(n,size,prob)
+  ##rbinom(จำนวนการทดลอง,จำนวนผลลัพการทดลองที่ต้องการให้ได้,ความน่าจะเป็น)
+  ##ex. โยนเหรียญสิบ1000 ครั้งหาความน่าจะเป็นที่เหรียญจะออกหัว10 ครั้งด้วยความน่าจะเป็น 0.5
+  binom_sample
+  mean(binom_sample)
+  var(binom_sample)
+  
+  library(tidyverse) ##call library
+  ##df <- tibble::data_frame(binom_sample)
+  df -> tibble(binom_sample)
+  ##habe to make data to dataframe to use ggplot by use tibble(data)
+  df
+  
+  b1 <- ggplot(data <- df,aes(x=binom_sample)) + geom_histogram(color="white")
+  b1
+```
+
+1.2 Poisson_distribution
+```{r}
+  num_obs <- 1000
+  pois_sample <- rpois(num_obs,2)
+  ####rpois(num of observation,frequency)
+  pois_sample
+  mean(pois_sample)
+  var(pois_sample)
+  
+  library(tidyverse)
+  df <- add_column(df, pois_sample)
+  ## add_colum(dataframe, new data) for add new colum data to old data frame
+  df
+  
+  b2 <- ggplot(data <- df,aes(x=pois_sample)) + geom_histogram(color="white")
+  b2
+```
+
+
+## 2 Continuous distribution
+2.1 Uniform distribution
+```{r}
+  num_obs <- 100000
+  uni_sample <- runif(num_obs,0,2)
+  ####unif(num of observation,min, max) 
+  
+  uni_sample
+  mean(uni_sample)
+  var(uni_sample)
+  
+  library(tidyverse)
+  cf <- tibble(uni_sample)
+  ## tibble(data) tibble to make data frame
+  cf
+  
+  c1 <- ggplot(data <- cf,aes(x=uni_sample)) + geom_histogram(color="white")
+  c1
+```
+
+2.2 Normal distribution
+```{r}
+  num_obs <- 100000
+  norm_sample <- rnorm(num_obs,4,2)
+  ####rnorm(num of observation,mean,standard deviation)
+  norm_sample[1:10]
+  ####data[start data:end data]
+  mean(norm_sample)
+  var(norm_sample)
+  
+  library(tidyverse)
+  cf <- add_column(cf,norm_sample)
+  ## tibble(data) tibble to make data frame
+  cf
+  
+  c2 <- ggplot(data <- cf,aes(x=norm_sample)) + geom_histogram(color="white")
+  c2
+```

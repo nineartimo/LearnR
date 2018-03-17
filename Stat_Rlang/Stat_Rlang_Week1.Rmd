@@ -1,0 +1,66 @@
+---
+title: "Stat : Rstudio Lecture 1 "
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+1 Load neccessary Library
+```{r}
+library(tidyverse)
+library(gapminder)
+```
+
+2 First look at the data
+```{r}
+glimpse(gapminder)
+```
+```{r}
+gapminder
+```
+
+```{r}
+summary(gapminder)
+```
+
+
+3.2 other stat
+```{r}
+# find s.d. of lifeExp
+sd(gapminder$lifeExp)
+```
+
+4.Visualization
+4.1 Histogram
+```{r}
+##ggplot to make graph ggplot(data,aes(xData,yData)) + geom_type of graph(customise)
+## geom_type of graph ex. geom_histrogram, geom_boxplot
+
+p1 <- ggplot(data = gapminder, aes(x=lifeExp)) +
+        geom_histogram(colour="white", binwidth = 1,fill="gold")
+
+p2 <- ggplot(data = gapminder, aes(x=gdpPercap)) +
+        geom_histogram(colour="white",bins = 50)
+
+p2 <- p2 + labs(x="GDP per capita ( dollars)",y="Count",title="Histogram of GDP")
+p2
+```
+
+4.2 Box.plot
+```{r}
+b1 <- ggplot(data = gapminder,aes(x=continent,y=lifeExp))+geom_boxplot()
+b1
+
+b2 <- ggplot(data = gapminder,aes(x=continent,y=gdpPercap))+geom_boxplot()
+b2
+
+# Subsetting Data
+###subsetting data by subset(data,target data)
+b3 <- ggplot(data=subset(gapminder,year==2007),aes(x=continent,y=pop))+geom_boxplot()
+b3
+```
+
+
+
